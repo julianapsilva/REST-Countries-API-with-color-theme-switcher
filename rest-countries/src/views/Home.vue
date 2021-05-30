@@ -2,12 +2,12 @@
   <div>
     <div>
       <label for="countries">Filtrar</label>
-      <select id="countries" :onchange="filterCountries">
-        <option value="africa">Africa</option>
-        <option value="america">America</option>
-        <option value="asia">Asia</option>
-        <option value="europa">Europa</option>
-        <option value="oceania">Oceania</option>
+      <select id="countries" :onchange="filterCountries" v-model="select">
+        <option value="Africa">Africa</option>
+        <option value="Americas">America</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europa</option>
+        <option value="Oceania">Oceania</option>
       </select>
     </div>
     <div class="countries-container">
@@ -32,6 +32,7 @@ export default {
   data: function() {
     return {
       countries: [],
+      select: "",
     };
   },
   methods: {
@@ -40,8 +41,12 @@ export default {
         .get("https://restcountries.eu/rest/v2/all")
         .then((r) => (this.countries = r.data));
     },
-    filterCountries(el){
-      console.log(el)
+    filterCountries() {
+      const region = this.countries.filter(
+        (country) => country.region == this.select
+      );
+      // this.countries = region;
+      console.log(region);
     },
   },
 
