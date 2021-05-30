@@ -1,27 +1,60 @@
 <template>
   <div>
     <div>
+      <input type="text" name="search" id="search" placeholder="Pesquise por um país" v-model="search">
+      <button @click="getSearch">Buscar</button>
+      <div >
+{{country}}
+      </div>
+      
+    </div>
+    <div>
       <label for="countries">Filtrar</label>
       <select id="countries" :onchange="filterCountries" v-model="select">
-        <option value="Africa">Africa</option>
-        <option value="Americas">America</option>
-        <option value="Asia">Asia</option>
-        <option value="Europe">Europa</option>
-        <option value="Oceania">Oceania</option>
+        <option country="Africa">Africa</option>
+        <option country="Americas">Americas</option>
+        <option country="Asia">Asia</option>
+        <option country="Europe">Europe</option>
+        <option country="Oceania">Oceania</option>
       </select>
     </div>
-    <div class="countries-container">
-      <div class="countries-item" v-for="value in countries" :key="value.name">
-        <img :src="value.flag" alt="" />
+    <div class="countries-container" v-if="!filter">
+      <div
+        class="countries-item"
+        v-for="country in countries"
+        :key="country.name"
+      >
+        <img :src="country.flag" alt="" />
         <ul>
           <li>
-            <strong>{{ value.name }}</strong>
+            <strong>{{ country.name }}</strong>
           </li>
-          <li><strong>População: </strong>{{ value.population }}</li>
-          <li><strong>Região: </strong>{{ value.region }}</li>
-          <li><strong>Capital: </strong>{{ value.capital }}</li>
+          <li><strong>População: </strong>{{ country.population }}</li>
+          <li><strong>Região: </strong>{{ country.region }}</li>
+          <li><strong>Capital: </strong>{{ country.capital }}</li>
         </ul>
       </div>
+    </div>
+    
+    <div class="countries-container" v-else>
+      <div
+        class="countries-item"
+        v-for="country in region"
+        :key="country.name"
+      >
+       <img :src="country.flag" alt="" />
+        <ul>
+          <li>
+            <strong>{{ country.name }}</strong>
+          </li>
+          <li><strong>População: </strong>{{ country.population }}</li>
+          <li><strong>Região: </strong>{{ country.region }}</li>
+          <li><strong>Capital: </strong>{{ country.capital }}</li>
+        </ul>
+      </div>
+      
+
+      
     </div>
   </div>
 </template>
@@ -33,6 +66,10 @@ export default {
     return {
       countries: [],
       select: "",
+      filter: false,
+      region: [],
+      search: "",
+      country: []
     };
   },
   methods: {
@@ -42,13 +79,19 @@ export default {
         .then((r) => (this.countries = r.data));
     },
     filterCountries() {
-      const region = this.countries.filter(
+      this.region = this.countries.filter(
         (country) => country.region == this.select
       );
-      // this.countries = region;
-      console.log(region);
+      this.filter = true;
     },
+    getSearch(){
+      axios.get(`https://restcountries.eu/rest/v2/name/${this.search}`)
+      .then(r=> this.country = r.data)
+      
+    }
   },
+
+
 
   created() {
     this.getCountries();
