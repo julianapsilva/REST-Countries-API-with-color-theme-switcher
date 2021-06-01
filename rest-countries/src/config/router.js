@@ -1,4 +1,22 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createWebHistory, createRouter } from "vue-router";
+import Home from "@/views/Home.vue";
+import Country from "@/views/Country.vue"
 
-Vue.use(VueRouter)
+const history = createWebHistory();
+const router = createRouter({
+  history,
+  routes: [
+    {
+      path: "/",
+      component: Home,
+    },
+    {
+      name: "country",
+      path: "/country/:name",
+      component: Country,
+      props: true
+    }
+  ],
+});
+
+export default router;

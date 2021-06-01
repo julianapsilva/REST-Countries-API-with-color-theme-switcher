@@ -1,12 +1,17 @@
 <template>
   <div>
     <div>
-      <input type="text" name="search" id="search" placeholder="Pesquise por um país" v-model="search">
+      <input
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Pesquise por um país"
+        v-model="search"
+      />
       <button @click="getSearch">Buscar</button>
-      <div >
-{{country}}
+      <div>
+        {{ country }}
       </div>
-      
     </div>
     <div>
       <label for="countries">Filtrar</label>
@@ -24,6 +29,7 @@
         v-for="country in countries"
         :key="country.name"
       >
+       <router-link :to="{ name: 'country', params: { name: country.name } }">
         <img :src="country.flag" alt="" />
         <ul>
           <li>
@@ -33,28 +39,24 @@
           <li><strong>Região: </strong>{{ country.region }}</li>
           <li><strong>Capital: </strong>{{ country.capital }}</li>
         </ul>
+        </router-link>
       </div>
     </div>
-    
-    <div class="countries-container" v-else>
-      <div
-        class="countries-item"
-        v-for="country in region"
-        :key="country.name"
-      >
-       <img :src="country.flag" alt="" />
-        <ul>
-          <li>
-            <strong>{{ country.name }}</strong>
-          </li>
-          <li><strong>População: </strong>{{ country.population }}</li>
-          <li><strong>Região: </strong>{{ country.region }}</li>
-          <li><strong>Capital: </strong>{{ country.capital }}</li>
-        </ul>
-      </div>
-      
 
-      
+    <div class="countries-container" v-else>
+      <div class="countries-item" v-for="country in region" :key="country.name">
+        <router-link :to="{ name: 'country', params: { name: country.name } }">
+          <img :src="country.flag" alt="flag" />
+          <ul>
+            <li>
+              <strong>{{ country.name }}</strong>
+            </li>
+            <li><strong>População: </strong>{{ country.population }}</li>
+            <li><strong>Região: </strong>{{ country.region }}</li>
+            <li><strong>Capital: </strong>{{ country.capital }}</li>
+          </ul>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -69,7 +71,7 @@ export default {
       filter: false,
       region: [],
       search: "",
-      country: []
+      country: [],
     };
   },
   methods: {
@@ -84,14 +86,12 @@ export default {
       );
       this.filter = true;
     },
-    getSearch(){
-      axios.get(`https://restcountries.eu/rest/v2/name/${this.search}`)
-      .then(r=> this.country = r.data)
-      
-    }
+    getSearch() {
+      axios
+        .get(`https://restcountries.eu/rest/v2/name/${this.search}`)
+        .then((r) => (this.country = r.data));
+    },
   },
-
-
 
   created() {
     this.getCountries();
