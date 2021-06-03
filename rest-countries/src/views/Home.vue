@@ -8,9 +8,8 @@
         placeholder="Pesquise por um país"
         v-model="search"
       />
-      <button @click="getSearch">Buscar</button>
       <div>
-        {{ country }}
+        <CountryContainer :countries="country" />
       </div>
     </div>
     <div>
@@ -23,47 +22,24 @@
         <option country="Oceania">Oceania</option>
       </select>
     </div>
-    <div class="countries-container" v-if="!filter">
-      <div
-        class="countries-item"
-        v-for="country in countries"
-        :key="country.name"
-      >
-       <router-link :to="{ name: 'country', params: { name: country.name } }">
-        <img :src="country.flag" alt="" />
-        <ul>
-          <li>
-            <strong>{{ country.name }}</strong>
-          </li>
-          <li><strong>População: </strong>{{ country.population }}</li>
-          <li><strong>Região: </strong>{{ country.region }}</li>
-          <li><strong>Capital: </strong>{{ country.capital }}</li>
-        </ul>
-        </router-link>
-      </div>
+
+    <div v-if="!filter && search == ''">
+      <CountryContainer :countries="countries" />
     </div>
 
-    <div class="countries-container" v-else>
-      <div class="countries-item" v-for="country in region" :key="country.name">
-        <router-link :to="{ name: 'country', params: { name: country.name } }">
-          <img :src="country.flag" alt="flag" />
-          <ul>
-            <li>
-              <strong>{{ country.name }}</strong>
-            </li>
-            <li><strong>População: </strong>{{ country.population }}</li>
-            <li><strong>Região: </strong>{{ country.region }}</li>
-            <li><strong>Capital: </strong>{{ country.capital }}</li>
-          </ul>
-        </router-link>
-      </div>
+    <div v-else-if="filter && search == ''">
+      <CountryContainer :countries="region" />
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import CountryContainer from "@/components/CountryContainer";
 export default {
+  components: {
+    CountryContainer,
+  },
   data: function() {
     return {
       countries: [],
@@ -90,6 +66,19 @@ export default {
       axios
         .get(`https://restcountries.eu/rest/v2/name/${this.search}`)
         .then((r) => (this.country = r.data));
+    },
+  },
+  watch: {
+    search() {
+      if (this.search == "") {
+        this.country = [];
+      } else {
+        axios
+          .get(`https://restcountries.eu/rest/v2/name/${this.search}`)
+          .then((r) => {
+            if (r.data) this.country = r.data;
+          });
+      }
     },
   },
 
