@@ -7,6 +7,7 @@ const router = createRouter({
   history,
   routes: [
     {
+      name: "home",
       path: "/",
       component: Home,
     },
