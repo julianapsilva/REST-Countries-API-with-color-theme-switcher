@@ -23,9 +23,9 @@
 <script>
 export default {
   props: {
-    countries: []
-  },
-};
+    countries: Array
+  }
+}
 </script>
 
 <style>

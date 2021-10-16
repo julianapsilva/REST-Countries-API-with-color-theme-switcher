@@ -1,96 +1,48 @@
 <template>
-  <div>
-    <div class="filter-search">
-      <div>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          placeholder="Pesquise por um país"
-          v-model="search"
-        />
-      </div>
-      <div>
-        <label for="countries">Filtrar</label>
-        <select id="countries" :onchange="filterCountries" v-model="select">
-          <option country="Africa">Africa</option>
-          <option country="Americas">Americas</option>
-          <option country="Asia">Asia</option>
-          <option country="Europe">Europe</option>
-          <option country="Oceania">Oceania</option>
-        </select>
-      </div>
-    </div>
-
-    <CountryContainer :countries="country" />
-
-    <div v-if="!filter && search == ''">
-      <CountryContainer :countries="countries" />
-    </div>
-
-    <div v-else-if="filter && search == ''">
-      <CountryContainer :countries="region" />
-    </div>
+  <div class="wrapper-home">
+    <Filters @filterCountries="filterCountries" :countries="allCountries" />
+    <CountryContainer :countries="countries" />
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
-import CountryContainer from "@/components/CountryContainer";
+import CountryContainer from '@/components/CountryContainer'
+import Filters from '@/components/Filters'
+import api from '@/services/api'
 export default {
   components: {
     CountryContainer,
+    Filters
   },
   data: function() {
     return {
-      countries: [],
-      select: "",
-      filter: false,
-      region: [],
-      search: "",
-      country: [],
-    };
+      allCountries: [],
+      countries: []
+    }
   },
   methods: {
-    getCountries() {
-      axios
-        .get("https://restcountries.eu/rest/v2/all")
-        .then((r) => (this.countries = r.data));
+    async getCountries() {
+      const response = await api.get('v2/all')
+      this.allCountries = response.data
+      this.countries = this.allCountries
     },
-    filterCountries() {
-      this.region = this.countries.filter(
-        (country) => country.region == this.select
-      );
-      this.filter = true;
-    },
-    getSearch() {
-      axios
-        .get(`https://restcountries.eu/rest/v2/name/${this.search}`)
-        .then((r) => (this.country = r.data));
-    },
+    filterCountries(payload) {
+      payload == 'all'
+        ? (this.countries = this.allCountries)
+        : (this.countries = payload)
+      console.log(payload)
+    }
   },
-  watch: {
-    search() {
-      if (this.search == "") {
-        this.country = [];
-      } else {
-        axios
-          .get(`https://restcountries.eu/rest/v2/name/${this.search}`)
-          .then((r) => {
-            if (r.data) this.country = r.data;
-          });
-      }
-    },
-  },
-
   created() {
-    this.getCountries();
-  },
-};
+    this.getCountries()
+  }
+}
 </script>
 
 <style>
+.wrapper-home {
+  background-color: hsl(0, 0%, 98%);
+}
 .countries-container {
   margin-right: 100px;
   margin-left: 100px;
@@ -108,15 +60,5 @@ export default {
 }
 .countries-item {
   border: 1px solid;
-}
-.filter-search {
-  display: flex;
-  justify-content: space-between;
-   margin-right: 100px;
-  margin-left: 100px;
-  margin-bottom: 40px;
-}
-#search{
-  padding: 10px 100px;
 }
 </style>
