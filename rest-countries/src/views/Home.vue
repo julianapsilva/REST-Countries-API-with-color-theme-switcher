@@ -43,22 +43,4 @@ export default {
 .wrapper-home {
   background-color: hsl(0, 0%, 98%);
 }
-.countries-container {
-  margin-right: 100px;
-  margin-left: 100px;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 80px;
-  line-height: 2;
-}
-.countries-container img {
-  width: 100%;
-}
-.countries-container ul li {
-  list-style: none;
-}
-.countries-item {
-  border: 1px solid;
-}
 </style>
