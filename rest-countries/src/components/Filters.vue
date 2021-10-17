@@ -12,8 +12,8 @@
       />
     </div>
     <div class="filter-select">
-      <label for="countries">Filter by Region</label>
       <select id="countries" :onchange="filterByRegion" v-model="select">
+        <option :value="null" disabled selected hidden>Filter by Region</option>
         <option country="all">All</option>
         <option country="Africa">Africa</option>
         <option country="Americas">Americas</option>
@@ -69,33 +69,33 @@ export default {
 #search {
   height: 30px;
   width: 400px;
-  padding: 10px;
+  padding: 10px 60px;
   box-shadow: 1px 4px 4px 0px rgba(0, 0, 0, 0.03);
   border: 0.5px solid rgba(0, 0, 0, 0.04);
   border-radius: 15px;
   text-align: left;
+  outline: none;
 }
 .search-input {
   position: relative;
 }
+
 .search-input img {
   position: absolute;
   top: 15px;
   left: 20px;
   width: 20px;
 }
-.search-input input::placeholder {
-  padding-left: 40px;
-}
+
 .filter-select {
   position: relative;
   display: flex;
   align-items: center;
 }
-.filter-select label {
+/* .filter-select label {
   position: absolute;
   margin-left: 10px;
-}
+} */
 .filter-select select {
   padding: 10px 40px;
 }
