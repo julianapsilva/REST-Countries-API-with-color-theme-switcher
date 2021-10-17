@@ -1,7 +1,9 @@
 <template>
   <div class="header">
     <div>
-      <h1>Where in the world?</h1>
+      <router-link to="/">
+        <h1>Where in the world?</h1></router-link
+      >
       <p>Dark Mode</p>
     </div>
   </div>
@@ -13,7 +15,6 @@ export default {}
 
 <style scoped>
 .header {
-
   color: black;
   margin-top: -50px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -22,7 +23,7 @@ export default {}
   margin-bottom: 40px;
   background: #fff;
 }
-.header div{
+.header div {
   padding: 0px 100px;
   display: flex;
   justify-content: space-between;
