@@ -35,7 +35,6 @@ export default {
       payload == 'all'
         ? (this.countries = this.allCountries)
         : (this.countries = payload)
-      console.log(payload)
     }
   },
   created() {
@@ -46,7 +45,6 @@ export default {
 
 <style>
 .wrapper-home {
-  background-color: hsl(0, 0%, 98%);
   padding: 0 100px;
 }
 

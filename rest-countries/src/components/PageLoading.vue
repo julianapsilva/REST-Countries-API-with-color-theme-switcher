@@ -19,7 +19,7 @@ export default {
   width: 10px;
   height: 10px;
   border-radius: 10px;
-  background: #000;
+  background: var(--light-mode-text);
   margin: 4px;
   animation: dots 0.6s cubic-bezier(0.6, 0.1, 1, 0.4) infinite alternate;
 }
@@ -38,6 +38,10 @@ export default {
 
 .loading span:nth-child(4) {
   animation-delay: 0.4s;
+}
+
+.theme-dark .loading span {
+  background: var(--white);
 }
 
 @keyframes dots {

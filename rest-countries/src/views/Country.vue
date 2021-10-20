@@ -139,10 +139,21 @@ export default {
   list-style: none;
   text-align: left;
 }
+button {
+  border: none;
+  background: var(--white);
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
 .border {
   display: flex;
   align-items: center;
   margin-top: 40px;
+  max-width: 720px;
+}
+.border b {
+  margin-right: 5px;
 }
 .border ul {
   display: flex;
@@ -153,7 +164,7 @@ export default {
   box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.07);
   padding: 4px 15px;
 }
-.border button:hover {
+ button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 .know-more {
@@ -177,12 +188,7 @@ export default {
   padding: 4px 30px;
   box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.17);
 }
-button {
-  border: none;
-  background: #fff;
-  border: 0.5px solid rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-}
+
 .icon-text {
   display: flex;
   align-items: center;
@@ -202,6 +208,16 @@ ul {
 }
 .item + .item:before {
   content: ',\00a0';
+}
+
+.theme-dark button {
+  background: var(--dark-mode-elements);
+  color: var(--white);
+}
+
+.theme-dark button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
 }
 
 @media (max-width: 1350px) {
