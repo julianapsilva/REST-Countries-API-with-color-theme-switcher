@@ -1,7 +1,7 @@
 <template>
   <div class="filter-search">
     <div class="search-input">
-      <img src="@/assets/icons/search.svg" alt="search-icon" />
+      <fa icon="search" />
       <input
         type="text"
         name="search"
@@ -81,11 +81,12 @@ export default {
   background: var(--light-mode-background);
 }
 
-.search-input img {
+.search-input svg {
   position: absolute;
-  top: 15px;
+  top: 17px;
   left: 20px;
   width: 20px;
+  color: var(--light-mode-input);
 }
 
 .filter-select {
@@ -105,7 +106,8 @@ export default {
 }
 
 .theme-dark .filter-select select,
-.theme-dark .search-input input {
+.theme-dark .search-input input,
+.theme-dark .search-input svg {
   background: var(--dark-mode-elements);
   color: var(--white);
 }
@@ -128,6 +130,11 @@ export default {
     width: 80%;
     padding: 10px 60px;
   }
+  .search-input svg {
+    width: 16px;
+    left: 30px;
+    top: 18px;
+  }
 }
 @media (max-width: 400px) {
   .filter-search {
@@ -138,10 +145,6 @@ export default {
     height: 30px;
     width: 220px;
     padding: 10px 50px;
-  }
-  .search-input img {
-    width: 16px;
-    top: 18px;
   }
 }
 </style>

@@ -68,6 +68,11 @@ export default {
   transition: all 0.3s;
 }
 
+.countries-item ul{
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
 @media (max-width: 1370px) {
   .countries-container {
     margin: 0 20px;

@@ -3,7 +3,7 @@
   <div class="wrapper-country" v-else>
     <button @click="redirect" class="go-back">
       <span class="icon-text">
-        <img src="@/assets/icons/arrow-left.svg" alt="goBack-icon" />
+        <fa icon="arrow-left" />
         <span>Back</span>
       </span>
     </button>
@@ -164,7 +164,7 @@ button {
   box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.07);
   padding: 4px 15px;
 }
- button:hover {
+button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 .know-more {
@@ -185,7 +185,7 @@ button {
   align-self: flex-start;
   margin-bottom: 60px;
   margin-top: 30px;
-  padding: 4px 30px;
+  padding: 9px 30px;
   box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.17);
 }
 
