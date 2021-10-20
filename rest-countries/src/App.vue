@@ -19,9 +19,16 @@ export default {
   },
   methods: {
     switchTheme() {
-      console.log('mudou')
       this.darkMode = !this.darkMode
     }
+  },
+  watch: {
+    darkMode() {
+      localStorage.setItem('darkMode', JSON.stringify(this.darkMode))
+    }
+  },
+  created() {
+    this.darkMode = JSON.parse(localStorage.getItem('darkMode'))
   }
 }
 </script>
@@ -48,7 +55,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 50px;
 
   min-height: 100vh;
   transition: all 0.5s ease-in-out;
