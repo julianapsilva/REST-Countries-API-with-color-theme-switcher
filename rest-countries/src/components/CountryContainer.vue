@@ -33,17 +33,14 @@ export default {
 
 <style>
 .countries-container {
-  margin-right: 100px;
-  margin-left: 100px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 60px;
   line-height: 2;
+  flex: 1;
+  gap: 120px;
 }
 .countries-container img {
-  /* width: 50%; */
-  max-width: 300px;
+  width: 300px;
   height: 200px;
 }
 .countries-container ul li {
@@ -71,11 +68,12 @@ export default {
   transition: all 0.3s;
 }
 
-@media (max-width: 1220px) {
+@media (max-width: 1370px) {
   .countries-container {
-    margin-right: 80px;
-    margin-left: 80px;
-    gap: 40px;
+    margin: 0 20px;
+    gap: 80px;
+    justify-content: center;
   }
 }
+
 </style>

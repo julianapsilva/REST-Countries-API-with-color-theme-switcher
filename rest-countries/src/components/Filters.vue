@@ -62,8 +62,6 @@ export default {
 .filter-search {
   display: flex;
   justify-content: space-between;
-  margin-right: 100px;
-  margin-left: 100px;
   margin-bottom: 40px;
 }
 #search {
@@ -79,6 +77,9 @@ export default {
 .search-input {
   position: relative;
 }
+.search-input input {
+  background: var(--light-mode-background);
+}
 
 .search-input img {
   position: absolute;
@@ -88,25 +89,59 @@ export default {
 }
 
 .filter-select {
-  position: relative;
   display: flex;
   align-items: center;
 }
-/* .filter-select label {
-  position: absolute;
-  margin-left: 10px;
-} */
 .filter-select select {
-  padding: 10px 40px;
+  padding: 12px 20px;
+  border: none;
+  background: var(--white);
+  box-shadow: 1px 4px 4px 0px rgba(0, 0, 0, 0.06);
+  border: 0.5px solid rgba(0, 0, 0, 0.05);
+  outline: none;
 }
-.label-select{
-  display:none;
+.label-select {
+  display: none;
 }
 
-@media(max-width: 900px){
-  .filter-search{
+.theme-dark .filter-select select,
+.theme-dark .search-input input {
+  background: var(--dark-mode-elements);
+  color: var(--white);
+}
+
+.theme-dark .search-input input::placeholder {
+  color: var(--white);
+}
+
+@media (max-width: 900px) {
+  .filter-search {
     flex-direction: column;
   }
+  .filter-select {
+    margin: 30px 0;
+  }
+  .filter-select select {
+    padding-right: 50px;
+  }
+  #search {
+    width: 80%;
+    padding: 10px 60px;
+  }
 }
-
+@media (max-width: 400px) {
+  .filter-search {
+    margin-left: -35px;
+    margin-right: -35px;
+  }
+  #search {
+    height: 30px;
+    width: 220px;
+    padding: 10px 50px;
+  }
+  .search-input img {
+    width: 16px;
+    top: 18px;
+  }
+}
 </style>
