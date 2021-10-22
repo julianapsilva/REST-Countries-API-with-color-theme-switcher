@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import api from '@/services/api'
 export default {
   data() {
     return {
@@ -49,8 +48,14 @@ export default {
     async searchByName() {
       let filter = 'all'
       if (this.search) {
-        const response = await api.get(`v2/name/${this.search}`)
-        filter = response.data
+        filter = this.countries.filter(({ name }) => {
+          return (
+            name
+              .toString()
+              .toLowerCase()
+              .indexOf(this.search.toLowerCase()) >= 0
+          )
+        })
       }
       this.$emit('filterCountries', filter)
     }
